@@ -40,7 +40,7 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  isNewUserAlert(data){
-    return data.userName === '';
+  isMineMessage(data){
+    return data.userName === sessionStorage.getItem("userName");
   }
 }

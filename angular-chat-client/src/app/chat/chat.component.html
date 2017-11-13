@@ -2,11 +2,11 @@
   <div class="col s12 chatContainer">
     <ul style="margin:0">
       <li  *ngFor="let msg of conversation">
-        <div *ngIf="!isNewUserAlert(msg)">
+        <div *ngIf="!isMineMessage(msg)">
           <span  class="userLabel" >{{msg.userName}}:</span>
           <span>{{msg.text}}</span>
         </div>
-        <div *ngIf="isNewUserAlert(msg)">
+        <div *ngIf="isMineMessage(msg)">
           <span style="font-weight:bold">{{msg.text}}</span>
         </div>
       </li>
