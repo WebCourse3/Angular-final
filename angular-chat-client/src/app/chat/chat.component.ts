@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { io } from 'socket.io';
+import * as io  from 'socket.io-client';
 
 @Component({
   selector: 'app-chat',
@@ -18,9 +18,9 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     if (sessionStorage.getItem("userName") === null){
-      this._router.navigate(['Registration']);
+      this._router.navigate(['registration']);
     }
-    this.socket = io('http://localhost:8000');
+    this.socket = io('http://localhost:3000');
     this.socket.on('chatUpdate', function(data) {
       this.conversation.push(data);
     }.bind(this));

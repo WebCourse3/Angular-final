@@ -13,7 +13,7 @@ export class UserRegistrationComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit() {
-    this.socket = io('http://localhost:8000');
+    this.socket = io('http://localhost:3000');
   }
 
   userName = '';
@@ -22,7 +22,7 @@ export class UserRegistrationComponent implements OnInit {
   login() {
     if (this.userName !== null){
       sessionStorage.setItem("userName", this.userName);
-      this._router.navigate(['Chat']);
+      this._router.navigate(['chat']);
       this.socket.emit('newUser', this.userName);
     }
   }
