@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import * as io  from 'socket.io-client';
+import { SocketsService } from '../sockets.service';
 
 @Component({
   selector: 'app-chat',
@@ -11,26 +12,24 @@ import * as io  from 'socket.io-client';
 export class ChatComponent implements OnInit {
   message = '';
   conversation = [];
-  socket = null;
-
-  constructor(private _router: Router){}
+  roomName = null;
+  constructor(private _router: Router, private _sockets:SocketsService){}
 
   ngOnInit() {
     if (sessionStorage.getItem("userName") === null){
       this._router.navigate(['registration']);
     }
-    this.socket = io('http://localhost:3000');
-    this.socket.on('chatUpdate', function(data) {
+    this._sockets.socket.on('chatUpdate', function(data) {
       this.conversation.push(data);
     }.bind(this));
+
+    this.roomName = sessionStorage.getItem("roomName");
   }
 
   send() {
-    this.socket.emit('newMessage', {
-      'userName': sessionStorage.getItem("userName"),
-      'text': this.message,
-      'roomName': sessionStorage.getItem("roomName")
-    });
+    this._sockets.newMessage(sessionStorage.getItem("userName"),
+                             sessionStorage.getItem("roomName"),
+                             this.message)
     this.message = '';
   }
 

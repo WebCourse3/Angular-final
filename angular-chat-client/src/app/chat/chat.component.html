@@ -1,33 +1,42 @@
-<div class="col s12">
-  <div class="col s12 chatContainer">
+<div class="row">
+  <div class="col s4 offset-s4 card-panel grey lighten-2">
+    <h3 class="center-align">{{roomName}}</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col s10 chatContainer offset-s1">
     <ul style="margin:0">
       <li  *ngFor="let msg of conversation">
         <div *ngIf="!isNewUserAlert(msg)">
           <div *ngIf="!isMineMessage(msg)">
             <span  class="userLabel" >{{msg.userName}}:</span>
             <span>{{msg.text}}</span>
+            <span class="msgDate">{{msg.msgDate}}</span>
           </div>
           <div *ngIf="isMineMessage(msg)">
             <span style="font-weight:bold">{{msg.text}}</span>
+            <span class="msgDate">{{msg.msgDate}}</span>
           </div>
         </div>
         <div *ngIf="isNewUserAlert(msg)">
-          <span style="color: crimson">{{msg.text}}</span>
+          <blockquote>{{msg.text}}</blockquote>
         </div>
       </li>
     </ul>
   </div>
   <div class="row">
-    <div class="col s9">
+    <div class="col s9 offset-s1">
       <input id="country" type="text"
              [(ngModel)]="message"
              (keypress)="keypressHandler($event)">
     </div>
     <button (click)="send()"  type="submit"
-            class="btn waves-effect waves-light s2"  name="action" >Send</button>
+            class="btn waves-effect waves-light col s1"  name="action" >Send</button>
   </div>
-</div>
-<div style="margin-top: 20%;">
-  <button (click)="navToRooms()"  type="submit"
-          class="btn waves-effect waves-light s2"  name="action" >Room list</button>
+  <div class="row">
+    <div class="col offset-s1">
+      <button (click)="navToRooms()"  type="submit"
+              class="btn waves-effect waves-light s2"  name="action" >Room list</button>
+    </div>
+  </div>
 </div>

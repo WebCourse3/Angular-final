@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import * as io  from 'socket.io-client';
+//import * as io  from 'socket.io-client';
 
 @Component({
   selector: 'app-user-registration',
@@ -13,7 +13,7 @@ export class UserRegistrationComponent implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit() {
-    this.socket = io('http://localhost:3000');
+    //this.socket = io('http://localhost:3000');
   }
 
   userName = '';

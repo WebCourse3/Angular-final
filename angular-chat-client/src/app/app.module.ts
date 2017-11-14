@@ -8,6 +8,7 @@ import { ChatComponent } from './chat/chat.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RoomsComponent } from './room/room.component';
+import { SocketsService } from './sockets.service';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { RoomsComponent } from './room/room.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [SocketsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
