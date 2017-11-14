@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { io } from 'socket.io';
+import * as io  from 'socket.io-client';
 
 @Component({
   selector: 'app-user-registration',
@@ -22,8 +22,7 @@ export class UserRegistrationComponent implements OnInit {
   login() {
     if (this.userName !== null){
       sessionStorage.setItem("userName", this.userName);
-      this._router.navigate(['chat']);
-      this.socket.emit('newUser', this.userName);
+      this._router.navigate(['rooms']);
     }
   }
 

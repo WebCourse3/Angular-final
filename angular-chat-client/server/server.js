@@ -7,15 +7,19 @@ var path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', function (socket) {
-  socket.on('newMessage', function (data) {
-    socket.emit('chatUpdate',data);
-    socket.broadcast.emit('chatUpdate',data);
+  socket.on('leaveOldRoom', function (room) {
+    socket.leave(room);
+  });
+  socket.on('joinRoom', function (room) {
+    socket.join(room);
+  });
+  socket.on('newMessage',function (data) {
+    socket.to(data.roomName).emit('chatUpdate',data.slice(2));
+    socket.to(data.roomName).broadcast.emit('chatUpdate',data.slice(2));
   });
   socket.on('newUser', function (data) {
-    socket.emit('chatUpdate',
-       {'userName':'','text':data+' has entered the room'});
     socket.broadcast.emit('chatUpdate',
-      {'userName':'','text':data+' has entered the room'});
+       {'userName':'','text':data+' has entered the room'});
   });
 });
 

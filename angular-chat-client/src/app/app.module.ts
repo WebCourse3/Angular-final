@@ -7,13 +7,15 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { ChatComponent } from './chat/chat.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { RoomsComponent } from './room/room.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRegistrationComponent,
-    ChatComponent
+    ChatComponent,
+    RoomsComponent
   ],
   imports: [
     BrowserModule,

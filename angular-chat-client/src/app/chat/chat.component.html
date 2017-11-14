@@ -2,12 +2,17 @@
   <div class="col s12 chatContainer">
     <ul style="margin:0">
       <li  *ngFor="let msg of conversation">
-        <div *ngIf="!isMineMessage(msg)">
-          <span  class="userLabel" >{{msg.userName}}:</span>
-          <span>{{msg.text}}</span>
+        <div *ngIf="!isNewUserAlert(msg)">
+          <div *ngIf="!isMineMessage(msg)">
+            <span  class="userLabel" >{{msg.userName}}:</span>
+            <span>{{msg.text}}</span>
+          </div>
+          <div *ngIf="isMineMessage(msg)">
+            <span style="font-weight:bold">{{msg.text}}</span>
+          </div>
         </div>
-        <div *ngIf="isMineMessage(msg)">
-          <span style="font-weight:bold">{{msg.text}}</span>
+        <div *ngIf="isNewUserAlert(msg)">
+          <span style="color: crimson">{{msg.text}}</span>
         </div>
       </li>
     </ul>
@@ -21,4 +26,8 @@
     <button (click)="send()"  type="submit"
             class="btn waves-effect waves-light s2"  name="action" >Send</button>
   </div>
+</div>
+<div style="margin-top: 20%;">
+  <button (click)="navToRooms()"  type="submit"
+          class="btn waves-effect waves-light s2"  name="action" >Room list</button>
 </div>

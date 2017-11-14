@@ -13,8 +13,7 @@ export class ChatComponent implements OnInit {
   conversation = [];
   socket = null;
 
-  constructor(
-    private _router: Router){}
+  constructor(private _router: Router){}
 
   ngOnInit() {
     if (sessionStorage.getItem("userName") === null){
@@ -29,7 +28,8 @@ export class ChatComponent implements OnInit {
   send() {
     this.socket.emit('newMessage', {
       'userName': sessionStorage.getItem("userName"),
-      'text': this.message
+      'text': this.message,
+      'roomName': sessionStorage.getItem("roomName")
     });
     this.message = '';
   }
@@ -42,5 +42,13 @@ export class ChatComponent implements OnInit {
 
   isMineMessage(data){
     return data.userName === sessionStorage.getItem("userName");
+  }
+
+  isNewUserAlert(data){
+    return data.userName === '';
+  }
+
+  navToRooms() {
+    this._router.navigate(['rooms']);
   }
 }
