@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import * as io  from 'socket.io-client';
 import { SocketsService } from '../sockets.service';
 
 @Component({
@@ -20,6 +19,15 @@ export class ChatComponent implements OnInit {
       this._router.navigate(['registration']);
     }
     this._sockets.socket.on('chatUpdate', function(data) {
+
+      if (data.text[0] === '@'){
+        var name = data.text.substr(1, data.text.indexOf(" "));
+
+        if (sessionStorage.getItem("userName") === name){
+          //Materialize.toast('I am a toast!', 3000, 'rounded');
+        }
+      }
+
       this.conversation.push(data);
     }.bind(this));
 
